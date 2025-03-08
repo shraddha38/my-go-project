@@ -1,9 +1,9 @@
 package concurrency
 
 import (
-	"encoding/json"
 	"net/http"
 	"sync"
+	"my-go-project/utils"
 )
 
 // Counter stores the current count and a mutex for thread safety.
@@ -30,15 +30,13 @@ var pessimisticCounter = &PessimisticCounter{value: 0}
 
 func IncrementHandlerForPessimisticLock(w http.ResponseWriter, r *http.Request) {
 	pessimisticCounter.Increment()
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]int{
+	utils.JsonResponseInt(w, map[string]int{
 		"count": pessimisticCounter.GetPessimisticValue(),
 	})
 }
 
 func ValueHandlerForPessimisticLock(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]int{
+	utils.JsonResponseInt(w, map[string]int{
 		"count": pessimisticCounter.GetPessimisticValue(),
 	})
 }

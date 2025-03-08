@@ -1,11 +1,11 @@
 package concurrency
 
 import (
-	"encoding/json"
 	"net/http"
 	"sync/atomic"
 	"time"
 	"fmt"
+	"my-go-project/utils"
 )
 
 // Counter stores the current count and a version for optimistic Counter.
@@ -36,18 +36,17 @@ func (c *OptimisticCounter) Increment() {
 	}
 }
 
+
 func IncrementHandlerForOptimisticVersioning(w http.ResponseWriter, r *http.Request) {
 	optimisticCounter.Increment()
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]int64{
+	utils.JsonResponse(w, map[string]int64{
 		"count":   atomic.LoadInt64(&optimisticCounter.value),
 		"version": atomic.LoadInt64(&optimisticCounter.version),
 	})
 }
 
 func ValueHandlerForOptimisticVersioning(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]int64{
+	utils.JsonResponse(w, map[string]int64{
 		"count":   atomic.LoadInt64(&optimisticCounter.value),
 		"version": atomic.LoadInt64(&optimisticCounter.version),
 	})
