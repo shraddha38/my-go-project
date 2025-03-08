@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"net/http"
 )
-
-// Counter stores the current count.
 type Counter struct {
 	value int
 }

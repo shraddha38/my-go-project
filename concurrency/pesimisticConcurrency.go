@@ -26,10 +26,8 @@ func (c *PessimisticCounter) GetPessimisticValue() int {
 	return c.value
 }
 
-// Global counter instance.
 var pessimisticCounter = &PessimisticCounter{value: 0}
 
-// Handler for the /increment endpoint.
 func IncrementHandlerForPessimisticLock(w http.ResponseWriter, r *http.Request) {
 	pessimisticCounter.Increment()
 	w.Header().Set("Content-Type", "application/json")
@@ -38,7 +36,6 @@ func IncrementHandlerForPessimisticLock(w http.ResponseWriter, r *http.Request) 
 	})
 }
 
-// Handler for the /value endpoint.
 func ValueHandlerForPessimisticLock(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]int{

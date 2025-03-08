@@ -20,7 +20,7 @@ Netflix is **concurrent** as it serves **millions of users simultaneously** 
 ### Challenges of Concurrency 
 
 #### 1. Race Conditions 
-Simply put, a race condition is a flaw in concurrent programming that occurs when multiple processes or threads of a program attempt to access a resource at the same time. In the context of databases, it is a condition where multiple database transactions or operations try to access and modify the same data concurrently.
+A race condition is a flaw in concurrent programming that occurs when multiple processes or threads of a program attempt to access a resource at the same time. In the context of databases, it is a condition where multiple database transactions or operations try to access and modify the same data concurrently.
 
 #####  Example
 1. **User A → Bank App:** Request withdraw $90
