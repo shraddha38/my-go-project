@@ -10,7 +10,7 @@ Concurrency is the ability of a software system to execute multiple tasks or ope
 
 > go version 
 
-> brew install 
+> brew install k6 
 
 ## Start a go server 
 ``` go run main.go ``` 

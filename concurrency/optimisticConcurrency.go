@@ -24,13 +24,15 @@ func (c *OptimisticCounter) Increment() {
 
 		// Sleep for a millisecond to avoid contention.
 		time.Sleep(1 * time.Millisecond)
-
 		// Attempt to update the counter if the version hasn't changed.
 		if atomic.CompareAndSwapInt64(&c.version, currentVersion, currentVersion+1) {
 			atomic.StoreInt64(&c.value, currentValue+1)
 			return
 		} else{
 			fmt.Println("Optimistic increment failed")
+
+
+			continue
 			// If the version has changed, retry the operation.
 		}
 	}
